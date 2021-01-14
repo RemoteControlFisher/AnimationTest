@@ -12,7 +12,7 @@ class duck {
       16, //Width
       25, //Height
       5, //Frames
-      0.15, //Time
+      0.08, //Time
       16, //Padding
       false, //reverse
       true, // looping,
@@ -25,7 +25,7 @@ class duck {
   }
 
   draw(ctx) {
-    this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, 3)
+    this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
   }
 }
 
