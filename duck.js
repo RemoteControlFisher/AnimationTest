@@ -12,7 +12,7 @@ class duck {
       16, //Width
       25, //Height
       5, //Frames
-      0.08, //Time
+      0.04, //Time
       16, //Padding
       false, //reverse
       true, // looping,
