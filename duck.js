@@ -5,8 +5,12 @@ class duck {
       this.y = y
     this.spritesheet = ASSET_MANAGER.getAsset("./sprites/duck.png")
     this.facing = 'r' // l for left, r for right.
-    this.state = state // stand, jump, walk, squat, slide are considered valid options.
-    this.animator = new animator(this.spritesheet, // Spritesheet
+    this.state = state // stand, jump, walk, holdstand, holdwalk, squat, slide are considered valid options.
+
+    this.animators = [];
+    this.armAnimators = [];
+
+    this.animators[0] = new animator(this.spritesheet, // Spritesheet
       41, //X
       14, //Y
       16, //Width
@@ -17,7 +21,7 @@ class duck {
       false, //reverse
       true, // looping,
       null) //No idle animation because I am looping.
-    this.arm = new animator(this.spritesheet,
+    this.armAnimators[0] = new animator(this.spritesheet,
       2,
       519,
       12,
@@ -28,9 +32,6 @@ class duck {
       false,
       true,
       null)
-
-    this.animators = [];
-    this.armAnimators = [];
 
     this.animators[1] = new animator(this.spritesheet, // Spritesheet
       40, //X
@@ -54,6 +55,28 @@ class duck {
       false,
       true,
       null)
+    this.animators[2]  = new animator(this.spritesheet, // Spritesheet
+      41, //X
+      14, //Y
+      16, //Width
+      25, //Height
+      5, //Frames
+      0.12, //Time
+      16, //Padding
+      false, //reverse
+      true, // looping,
+      null) //No idle animation because I am looping.
+    this.armAnimators[2] = new animator(this.spritesheet,
+      68,
+      472,
+      15,
+      12,
+      1,
+      0.10,
+      8,
+      false,
+      true,
+      null)
 
   }
 
@@ -63,13 +86,17 @@ class duck {
 
   draw(ctx) {
     switch (this.state) {
-      case "stand":
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
-        this.arm.drawFrame(this.game.clockTick, ctx, this.x-1, this.y + 16, 2)
+      case "walk":
+        this.animators[0].drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
+        this.armAnimators[0].drawFrame(this.game.clockTick, ctx, this.x - 1, this.y + 16, 2)
         break;
       case "jump":
         this.animators[1].drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
         //this.armAnimators[1].drawFrame(this.game.clockTick, ctx, this.x, this.y + 12, 2)
+        break;
+      case "holdwalk":
+        this.animators[2].drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
+        //this.armAnimators[2].drawFrame(this.game.clockTick, ctx, this.x + 16, this.y + 14, 2)
         break;
     }
 

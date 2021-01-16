@@ -19,7 +19,6 @@ class animator {
         Object.assign(this, {spritesheet, xStart, yStart, width, height, frameCount, frameDuration, framePadding, reverse, loop, idleFrame} )
         this.elapsedTime = 0
         this.totalTime = this.frameCount*this.frameDuration
-        console.log(this)
     }
 
     drawFrame (tick, ctx, x, y, scale){
@@ -41,7 +40,6 @@ class animator {
 
         let frame = this.currentFrame();
         if (this.reverse) frame = this.frameCount - frame - 1
-        console.log(this.xStart + frame * this.width * this.framePadding)
 
         ctx.drawImage(
             this.spritesheet,
