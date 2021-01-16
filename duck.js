@@ -1,11 +1,11 @@
 class duck {
-  constructor(game, x, y) {
+  constructor(game, state, x, y) {
     this.game = game
     this.x = x,
-    this.y = y
+      this.y = y
     this.spritesheet = ASSET_MANAGER.getAsset("./sprites/duck.png")
     this.facing = 'r' // l for left, r for right.
-    this.state = "stand" // stand, jump, walk, squat, slide are considered valid options.
+    this.state = state // stand, jump, walk, squat, slide are considered valid options.
     this.animator = new animator(this.spritesheet, // Spritesheet
       41, //X
       14, //Y
@@ -17,7 +17,44 @@ class duck {
       false, //reverse
       true, // looping,
       null) //No idle animation because I am looping.
-    //this.arm = new duckArm(game, this, x, y)
+    this.arm = new animator(this.spritesheet,
+      2,
+      519,
+      12,
+      16,
+      6,
+      0.10,
+      4,
+      false,
+      true,
+      null)
+
+    this.animators = [];
+    this.armAnimators = [];
+
+    this.animators[1] = new animator(this.spritesheet, // Spritesheet
+      40, //X
+      46, //Y
+      20, //Width
+      26, //Height
+      4, //Frames
+      0.30, //Time
+      12, //Padding
+      false, //reverse
+      true, // looping,
+      null) //No idle animation because I am looping.
+    this.armAnimators[1] = new animator(this.spritesheet,
+      2,
+      532,
+      12,
+      16,
+      5,
+      0.24,
+      4,
+      false,
+      true,
+      null)
+
   }
 
   update() {
@@ -25,7 +62,18 @@ class duck {
   }
 
   draw(ctx) {
-    this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
+    switch (this.state) {
+      case "stand":
+        this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
+        this.arm.drawFrame(this.game.clockTick, ctx, this.x-1, this.y + 16, 2)
+        break;
+      case "jump":
+        this.animators[1].drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
+        //this.armAnimators[1].drawFrame(this.game.clockTick, ctx, this.x, this.y + 12, 2)
+        break;
+    }
+
+
   }
 }
 
