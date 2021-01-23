@@ -67,13 +67,13 @@ class duck {
       true, // looping,
       null) //No idle animation because I am looping.
     this.armAnimators[2] = new animator(this.spritesheet,
-      68,
-      472,
-      15,
-      12,
-      1,
-      0.10,
+      7,
+      570,
+      10,
       8,
+      6,
+      0.10,
+      6,
       false,
       true,
       null)
@@ -96,7 +96,7 @@ class duck {
         break;
       case "holdwalk":
         this.animators[2].drawFrame(this.game.clockTick, ctx, this.x, this.y, 2)
-        //this.armAnimators[2].drawFrame(this.game.clockTick, ctx, this.x + 16, this.y + 14, 2)
+        this.armAnimators[2].drawFrame(this.game.clockTick, ctx, this.x + 15, this.y + 19, 2)
         break;
     }
 

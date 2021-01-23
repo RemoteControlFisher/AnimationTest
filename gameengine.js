@@ -14,6 +14,7 @@ class GameEngine {
 
     init(ctx) {
         this.ctx = ctx;
+        ctx.imageSmoothingEnabled = false;
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
         this.startInput();
